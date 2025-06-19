@@ -8,6 +8,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] private SpawnPoint[] _spawnPoints;
 
     private WaitForSeconds _wait;
+    private SpawnPoint _currentSpawnPoint;
+    private Enemy _currentEnemy;
 
     private void Awake()
     {
@@ -32,6 +34,10 @@ public class Spawner : MonoBehaviour
 
     private void Spawn()
     {
-        _spawnPoints[Random.Range(0, _spawnPoints.Length)].Spawn();
+        _currentSpawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
+
+        _currentEnemy = Instantiate(_currentSpawnPoint.Prefab, _currentSpawnPoint.transform.position, Quaternion.identity);
+        
+        _currentEnemy.SetTarget(_currentSpawnPoint.Target);
     }
 }

@@ -1,8 +1,16 @@
 using UnityEngine;
 
-public class Target : Mover
+[RequireComponent(typeof(Mover))]
+
+public class Target : MonoBehaviour
 {
     [SerializeField] private Transform[] _waypoints;
+    private Mover _mover;
+
+    public void Awake()
+    {
+        _mover = GetComponent<Mover>();
+    }
 
     private int _currentWeypoint = 0;
 
@@ -13,6 +21,6 @@ public class Target : Mover
             _currentWeypoint = (_currentWeypoint + 1) % _waypoints.Length;
         }
 
-        Move(_waypoints[_currentWeypoint]);
+        _mover.Move(_waypoints[_currentWeypoint]);
     }
 }
