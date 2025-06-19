@@ -1,19 +1,14 @@
-using UnityEngine;
-
-public class Enemy : MonoBehaviour
+public class Enemy : Mover
 {
-    [SerializeField] private float _speed;
-
-    private Vector3 _direction;
+    private Target _target;
 
     private void Update()
     {
-        transform.rotation = Quaternion.LookRotation(_direction);
-        transform.Translate(_direction * _speed * Time.deltaTime, Space.World);
+        Move(_target.transform);
     }
 
-    public void SetDirection(Vector3 direction)
+    public void SetTarget(Target target)
     {
-        _direction = direction;
+        _target = target;
     }
 }
